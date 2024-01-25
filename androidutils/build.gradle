@@ -3,21 +3,14 @@ plugins {
     id 'maven-publish'
 }
 
-archivesBaseName = 'androidutils'
-version = '1.0.1'
-group = 'com.github.prahladsingandi'
-
-
 android {
     namespace 'always.keeplearning.androidutils'
     compileSdk 34
 
     defaultConfig {
-
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
+        aarMetadata {
+            minCompileSdk = 29
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -33,9 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    testFixtures {
-        enable = true
-    }
+
 }
 
 dependencies {
@@ -47,17 +38,32 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifact("build/libs/${archivesBaseName}-${version}.jar") {
-                extension 'jar'
+/*afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication){
+                from components{release}
+                groupId = 'com.github.prahladsingandi' //your git id
+                artifactId = 'androidutils' //your-repository
+                version = '1.0.1' // As same as the Tag
+
+                artifact("$buildDir/outputs/aar/${artifactId}-release.aar") // here is difference, I used `from components...` before
+
             }
         }
     }
-}
+}*/
 
+afterEvaluate {
+    publishing{
+        publications{
+            bar(MavenPublication){
 
-publishToMavenLocal.configure {
-    mustRunAfter build
+                groupId = 'com.github.prahladsingandi' //your git id
+                artifactId = 'androidutils' //your-repository
+                version = '1.0.1' // As same as the Tag
+                artifact("$buildDir/outputs/aar/androidutils-release.aar") // here is difference, I used `from components...` before
+            }
+        }
+    }
 }

@@ -41,7 +41,6 @@ afterEvaluate {
         publications {
 // Creates a Maven publication called "release".
             release(MavenPublication) {
-                from components {release}
                 groupId = 'com.github.prahladsingandi'
                 artifactId = 'avadroidutils'
                 version = '1.0.1'
@@ -51,3 +50,4 @@ afterEvaluate {
         }
     }
 }
+

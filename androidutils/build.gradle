@@ -3,6 +3,11 @@ plugins {
     id 'maven-publish'
 }
 
+archivesBaseName = 'androidutils'
+version = '1.0.1'
+group = 'com.github.prahladsingandi'
+
+
 android {
     namespace 'always.keeplearning.androidutils'
     compileSdk 34
@@ -42,16 +47,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-// Creates a Maven publication called "release".
-            release(MavenPublication) {
-                groupId = 'com.github.prahladsingandi'
-                artifactId = 'androidutils'
-                version = '1.0.1'
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/${archivesBaseName}-${version}.jar") {
+                extension 'jar'
             }
         }
     }
 }
 
+
+publishToMavenLocal.configure {
+    mustRunAfter build
+}

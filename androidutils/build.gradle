@@ -39,3 +39,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication){
+//                from components.release
+                groupId = 'com.github.prahladsingandi' //your git id
+                artifactId = 'avadroidutils' //your-repository
+                version = '1.0.1' // As same as the Tag
+
+                artifact("$buildDir/outputs/aar/${artifactId}-release.aar") // here is difference, I used `from components...` before
+
+            }
+        }
+    }
+}

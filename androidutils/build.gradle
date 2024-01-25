@@ -40,12 +40,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
+ext {
+    release = "1.0.0"
+}
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifact("build/libs/${archivesBaseName}-${version}.jar") {
-                extension 'jar'
+afterEvaluate {
+    publishing {
+        publications {
+// Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components {release}
+                groupId = 'com.github.prahladsingandi'
+                artifactId = 'avadroidutils'
+                version = '1.1.0'
             }
         }
     }

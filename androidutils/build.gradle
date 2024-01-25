@@ -43,10 +43,10 @@ afterEvaluate {
             release(MavenPublication) {
                 from components {release}
                 groupId = 'com.github.prahladsingandi'
-                artifactId = 'androidutils'
+                artifactId = 'avadroidutils'
                 version = '1.0.1'
 
-                artifact("$buildDir/outputs/aar/${artifactId}-debug.aar") // here is difference, I used `from components...` before
+                artifact("$buildDir/outputs/aar/${artifactId}-release.aar") // here is difference, I used `from components...` before
             }
         }
     }

@@ -38,11 +38,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-/*afterEvaluate {
+afterEvaluate {
     publishing {
         publications {
             release(MavenPublication){
-                from components{release}
+                from components.findByName('release')
                 groupId = 'com.github.prahladsingandi' //your git id
                 artifactId = 'androidutils' //your-repository
                 version = '1.0.1' // As same as the Tag
@@ -52,7 +52,9 @@ dependencies {
             }
         }
     }
-}*/
+}
+/*
+
 
 afterEvaluate {
     publishing{
@@ -67,3 +69,5 @@ afterEvaluate {
         }
     }
 }
+
+*/
